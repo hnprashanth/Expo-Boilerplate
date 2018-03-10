@@ -7,19 +7,6 @@ import {
 } from './types';
 
 export const facebookLogin = () => async dispatch => {
-  doFacebookLogin(dispatch);
-};
-
-export const checkLogin = () => async dispatch => {
-  let token = await AsyncStorage.getItem('fb_token');
-
-  if (token) {
-    // Dispatch an action saying FB login is done
-    dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
-  }
-};
-
-const doFacebookLogin = async dispatch => {
   let { type, token } = await Facebook.logInWithReadPermissionsAsync('FB-APP-ID', {
     permissions: ['public_profile']
   });
@@ -30,4 +17,13 @@ const doFacebookLogin = async dispatch => {
 
   await AsyncStorage.setItem('fb_token', token);
   dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+};
+
+export const checkLogin = () => async dispatch => {
+  let token = await AsyncStorage.getItem('fb_token');
+
+  if (token) {
+    // Dispatch an action saying FB login is done
+    dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  }
 };

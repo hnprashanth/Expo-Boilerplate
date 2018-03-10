@@ -7,7 +7,7 @@ import * as actions from '../actions';
 class Auth extends Component {
 
   componentWillMount() {
-    this.props.checkLogin();  
+    this.props.checkLogin();
   }
 
   componentDidMount() {
